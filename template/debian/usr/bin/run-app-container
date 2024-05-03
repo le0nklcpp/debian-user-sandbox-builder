@@ -1,0 +1,4 @@
+#!/bin/sh
+xhost +SI:localuser:%USER%
+pactl load-module module-native-protocol-unix auth-group=pa-sandbox socket=/tmp/%USER%-container-pulse
+pkexec --user %USER% "/usr/bin/%USER%-container" $1

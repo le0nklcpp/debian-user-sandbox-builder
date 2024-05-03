@@ -1,0 +1,11 @@
+Package: %PKGNAME%
+Version: 1.0.0
+Architecture: amd64
+Maintainer: %MAINTAINER% <%MAINTAINER_EMAIL%>
+Depends: %EXTRA_DEPS% pkexec, policykit-1
+Suggests: pulseaudio
+Provides: %PROVIDES%
+Section: %SECTION%
+Priority: optional
+Homepage: %HOMEPAGE%
+Description: Allows you to run %PKGNAME% from a separate user
