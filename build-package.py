@@ -18,7 +18,13 @@
 import os
 import pathlib
 import sys
-
+import argparse
+parse = argparse.ArgumentParser(prog="Automatic Isolated User Sandbox builder",
+epilog="Copyright (C) le0nklcpp,2024\
+    This program is free software: you can redistribute it and/or modify\n\
+    it under the terms of the GNU General Public License as published by\n\
+    the Free Software Foundation, either version 3 of the License, or\n\
+    (at your option) any later version")
 cwd = '.'
 templatedict = {
 '%USER%':None,
@@ -58,16 +64,6 @@ argnames = {
 '--extra-deps':'%EXTRA_DEPS%'
 
 }
-def display_help():
-     print("Automatic Isolated User Sandbox builder")
-     print("Copyright (C) le0nklcpp,2024")
-     print("This program is free software: you can redistribute it and/or modify\n"+\
-    "it under the terms of the GNU General Public License as published by\n"+\
-    "the Free Software Foundation, either version 3 of the License, or\n"+\
-    "(at your option) any later version.")
-     print("Usage:build-package.py [options]")
-     print("Where [options] are:")
-     print(argnames)
 def replace_template(fl,root):
     f = open(root+fl.name,'r')
     data = f.read()
@@ -92,35 +88,18 @@ def rec_apply(d,root):
      else:
           replace_template(fl,root)
 def read_args():
-    i = 0
-    skip = []
-    for i in range(1,len(sys.argv)):
-        if i in skip:
-            continue
-        if sys.argv[i] in argnames:
-            if i==(len(sys.argv)-1):
-                print("Expected something after "+sys.argv[i])
-                display_help()
-                exit()
-            templatedict[argnames[sys.argv[i]]] = sys.argv[i+1]
-            skip.append(i+1)
-            continue
-        else:
-            if sys.argv[i]=='--help':
-                display_help()
-                exit()
-            print("We don't know what did you mean by this:"+sys.argv[i])
-            exit()
-def check_missing_args():
-    for i in templatedict:
-     if templatedict[i]==None:
-      print("You must specify "+i)
-      display_help()
-      exit()
+    for args in argnames:
+     parse.add_argument(args,required=(templatedict[argnames[args]]==None))
+    args = vars(parse.parse_args())
+    for i in args:
+     arg = '--'+i
+     arg = arg.replace('_','-') # What a bright idea to fix what is not broken
+     if(arg in argnames)and(args[i]!=None):
+      templatedict[argnames[arg]] = args[i]
+
 def main_action():
     cwd = os.getcwd()
     read_args()
-    check_missing_args()
     os.mkdir(templatedict['%PKGNAME%'])
     for i in renamefiles:
      for k in templatedict:
