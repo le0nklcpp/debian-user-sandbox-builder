@@ -6,4 +6,4 @@ Comment=Run %APP_EXE% as a separated user
 Icon=%ICON%
 Exec=/usr/bin/run-%USER%-container
 Actions=
-Categories=Network;
+Categories=%DESKTOP_CAT%;

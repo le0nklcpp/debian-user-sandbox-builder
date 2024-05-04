@@ -39,7 +39,8 @@ templatedict = {
 '%VENDOR%':'le0nklcpp',
 '%DESKTOPNAME%':None,
 '%ICON%':None,
-'%EXTRA_DEPS%':''
+'%EXTRA_DEPS%':'',
+'%DESKTOP_CAT%':'Network'
 }
 renamefiles = {
 '/usr/share/polkit-1/actions/app.domain.container.actions':'%PKDOMAIN%.actions',
@@ -61,8 +62,8 @@ argnames = {
 '--polkit-vendor':'%VENDOR%',
 '--desktop-name':'%DESKTOPNAME%',
 '--icon':'%ICON%',
-'--extra-deps':'%EXTRA_DEPS%'
-
+'--extra-deps':'%EXTRA_DEPS%',
+'--desktop-cat':'%DESKTOP_CAT%'
 }
 def replace_template(fl,root):
     f = open(root+fl.name,'r')
@@ -107,5 +108,6 @@ def main_action():
     rec_apply(pathlib.Path('template'),'template/')
     os.system("chmod 755 -R "+templatedict['%PKGNAME%'])
     os.system("dpkg-deb --build --root-owner-group "+templatedict['%PKGNAME%']+'/debian')
+    print("[Done]Thank you for using this tool :3")
 if __name__=="__main__":
  main_action()

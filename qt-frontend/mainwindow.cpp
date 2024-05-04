@@ -82,6 +82,19 @@ MainWindow::MainWindow(QWidget *parent)
     <<QString( "xfce")
     <<QString( "zope");
     ui->catSelection->addItems(cats);
+    QStringList desktop_cat;
+    desktop_cat<<QString("AudioVideo")
+               <<QString("Audio")
+               <<QString("Video")
+               <<QString("Development")
+               <<QString("Education")
+               <<QString("Game")
+               <<QString("Graphics")
+               <<QString("Network")
+               <<QString("Office")
+               <<QString("Settings")
+               <<QString("Utility ");
+    ui->desktopCategory->addItems(desktop_cat);
 }
 
 MainWindow::~MainWindow()
@@ -106,6 +119,7 @@ void MainWindow::on_buildButton_clicked()
    args["desktop-name"] = ui->desktopName->text();
    args["icon"] = ui->iconName->text();
    args["extra-deps"] = ui->extraDeps->text();
+   args["desktop-cat"] = ui->desktopCategory->currentText();
    BuildDialog * form = new BuildDialog(this,&args);
    form->show();
 }
