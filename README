@@ -1,3 +1,5 @@
+This project is not affiliated with Debian. Debian is a registered trademark owned by Software in the Public Interest, Inc.
+
 A tool that automatically generates configuration for running specified application from isolated user on desktop.
 Installing generated .deb will create separate user and allow you to read its contents. The app will still use your XServer and Pulseaudio instance.
 
