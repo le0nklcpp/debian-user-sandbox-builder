@@ -1,5 +1,6 @@
 #!/bin/sh
-adduser --disabled-login --gecos --system "" %USER%
+adduser --disabled-login  --home /home/%USER% --system  %USER%
+addgroup %USER%
 mkdir /home/%USER%/.config
 mkdir /home/%USER%/.config/pulse
 echo "default-server = unix:/tmp/%USER%-container-pulse" > /home/%USER%/.config/pulse/client.conf
