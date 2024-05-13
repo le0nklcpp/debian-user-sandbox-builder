@@ -43,7 +43,7 @@ templatedict = {
 '%DESKTOP_CAT%':'Network'
 }
 renamefiles = {
-'/usr/share/polkit-1/actions/app.domain.container.actions':'%PKDOMAIN%.actions',
+'/usr/share/polkit-1/actions/app.domain.container.policy':'%PKDOMAIN%.policy',
 '/usr/share/applications/desktop/app-container.desktop':'%PKGNAME%.desktop',
 '/usr/bin/app-container':'%USER%-container',
 '/usr/bin/run-app-container':'run-%USER%-container',
