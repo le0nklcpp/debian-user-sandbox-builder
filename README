@@ -2,8 +2,12 @@ This project is not affiliated with Debian. Debian is a registered trademark own
 
 A tool that automatically generates configuration for running specified application from isolated user on desktop.
 Installing generated .deb will create separate user and allow you to read its contents. The app will still use your XServer and Pulseaudio instance.
+IMPORTANT NOTICE: it also adds every desktop user to sandbox group, so EVERY machine USER will be able to READ and MODIFY sandbox user contents.
 
 For example: running this tool like that:
 ./build-package.py --name firefox-sandbox --user ff --maintainer le0nklcpp --maintainer-email le0nklcpp@gmail.com --provides www-browser --section web --homepage github.com/le0nklcpp --pkdomain org.mozilla.firefox.container --exe firefox-esr
 
 will create .deb package, that, if installed will allow you to run firefox-esr inside of a separate user
+
+This tool also has a Qt frontend that will help you configure your package. To build it you only need qt5-base-dev or qt6-base-dev:
+cd qt-frontend && qmake6 && make
